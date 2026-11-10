@@ -23,6 +23,7 @@ let activeRoom = null;
 let cameraOn = false;
 let micOn = false;
 let screenSharing = false;
+let focusedParticipantId = "";
 let timerInterval = null;
 let toastTimeout = null;
 let callStartedAt = 0;
@@ -169,6 +170,32 @@ function renderParticipantList() {
   $("#participant-count").textContent = String(remoteParticipants.size + 1);
 }
 
+function updateParticipantFocus() {
+  const focusedView = remoteParticipants.get(focusedParticipantId);
+  if (!focusedView) focusedParticipantId = "";
+
+  for (const participantView of remoteParticipants.values()) {
+    const isFocused = participantView.participant.identity === focusedParticipantId;
+    participantView.card.classList.toggle("is-focused", isFocused);
+    const button = participantView.card.querySelector(".remote-fullscreen-toggle");
+    const name = participantView.participant.name || participantView.participant.identity;
+    button.setAttribute("aria-label", isFocused ? "Exit full screen video" : "Show " + name + " full screen");
+    button.setAttribute("aria-pressed", String(isFocused));
+    button.title = isFocused ? "Exit full screen video" : "Show full screen";
+    button.innerHTML = isFocused
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v5H3m13-5v5h5M3 16h5v5m13-5h-5v5"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"/></svg>';
+  }
+
+  remoteVideoGrid.classList.toggle("has-focused-participant", Boolean(focusedParticipantId));
+  $("#self-video-card").classList.toggle("hidden", Boolean(focusedParticipantId));
+}
+
+function toggleParticipantFocus(identity) {
+  focusedParticipantId = focusedParticipantId === identity ? "" : identity;
+  updateParticipantFocus();
+}
+
 function createRemoteParticipant(participant) {
   let participantView = remoteParticipants.get(participant.identity);
   if (participantView) {
@@ -194,11 +221,23 @@ function createRemoteParticipant(participant) {
   const footer = document.createElement("div");
   footer.className = "remote-participant-footer";
   footer.textContent = participant.name || participant.identity;
-  card.append(placeholder, feeds, footer);
+  const fullscreenButton = document.createElement("button");
+  fullscreenButton.type = "button";
+  fullscreenButton.className = "remote-fullscreen-toggle";
+  fullscreenButton.setAttribute("aria-label", "Show " + (participant.name || participant.identity) + " full screen");
+  fullscreenButton.title = "Show full screen";
+  fullscreenButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"/></svg>';
+  card.append(placeholder, feeds, footer, fullscreenButton);
   remoteVideoGrid.append(card);
 
   participantView = { participant, card, feeds, placeholder };
   remoteParticipants.set(participant.identity, participantView);
+  card.addEventListener("click", (event) => {
+    if (event.target.closest(".remote-fullscreen-toggle")) return;
+    toggleParticipantFocus(participant.identity);
+  });
+  fullscreenButton.addEventListener("click", () => toggleParticipantFocus(participant.identity));
+  updateParticipantFocus();
   return participantView;
 }
 
@@ -228,6 +267,8 @@ function removeRemoteParticipant(participant) {
   }
   participantView.card.remove();
   remoteParticipants.delete(participant.identity);
+  if (focusedParticipantId === participant.identity) focusedParticipantId = "";
+  updateParticipantFocus();
   renderParticipantList();
   setConnectionSummary();
 }
@@ -374,7 +415,9 @@ function clearRemoteParticipants() {
   remoteVideoTracks.clear();
   remoteAudioTracks.clear();
   remoteParticipants.clear();
+  focusedParticipantId = "";
   remoteVideoGrid.replaceChildren();
+  updateParticipantFocus();
   renderParticipantList();
 }
 

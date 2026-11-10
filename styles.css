@@ -211,7 +211,7 @@ h1, h2, p { margin-top: 0; }
 .remote-video-grid { position: absolute; z-index: 0; inset: 14px; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(230px,45%),1fr)); align-content: center; gap: 12px; overflow: auto; padding-bottom: 70px; }
 .remote-video-grid:empty { display: none; }
 .stage-main.has-remote-participants .waiting-content { display: none; }
-.remote-participant-card { position: relative; min-height: 155px; aspect-ratio: 16/10; overflow: hidden; border: 1px solid #ffffff1c; border-radius: 10px; background: #292a31; box-shadow: 0 6px 22px #08080b4d; }
+.remote-participant-card { position: relative; min-height: 155px; aspect-ratio: 16/10; overflow: hidden; border: 1px solid #ffffff1c; border-radius: 10px; background: #292a31; box-shadow: 0 6px 22px #08080b4d; cursor: zoom-in; }
 .remote-participant-feeds { position: absolute; inset: 0; }
 .remote-video-feed { position: absolute; z-index: 0; inset: 0; min-width: 0; min-height: 0; overflow: hidden; }
 .remote-video-feed video { width: 100%; height: 100%; object-fit: cover; }
@@ -222,6 +222,14 @@ h1, h2, p { margin-top: 0; }
 .remote-participant-footer,.remote-video-label { position: absolute; right: 0; bottom: 0; left: 0; padding: 15px 9px 7px; background: linear-gradient(transparent,#101116bd); color: #f6f5f7; font-size: 8px; }
 .remote-video-label { z-index: 1; }
 .remote-participant-footer { z-index: 2; pointer-events: none; }
+.remote-fullscreen-toggle { position: absolute; z-index: 3; top: 9px; right: 9px; width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid #ffffff35; border-radius: 7px; background: #17181dba; color: #fff; opacity: .8; }
+.remote-fullscreen-toggle:hover,.remote-fullscreen-toggle:focus-visible { background: #17181de8; opacity: 1; }
+.remote-fullscreen-toggle svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.remote-video-grid.has-focused-participant { inset: 0; z-index: 3; display: block; overflow: hidden; padding: 0; }
+.remote-video-grid.has-focused-participant .remote-participant-card:not(.is-focused) { display: none; }
+.remote-participant-card.is-focused { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; aspect-ratio: auto; border: 0; border-radius: 0; cursor: zoom-out; }
+.remote-participant-card.is-focused .remote-fullscreen-toggle { top: 16px; right: 16px; width: 36px; height: 36px; }
+.remote-participant-card.is-focused .remote-fullscreen-toggle svg { width: 18px; height: 18px; }
 .remote-audio { position: fixed; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .self-video-card { position: absolute; z-index: 2; right: 17px; bottom: 17px; width: clamp(135px,17vw,208px); aspect-ratio: 16/10; overflow: hidden; border: 1px solid #ffffff2a; border-radius: 9px; background: #292a31; box-shadow: 0 8px 24px #08080b4d; }
 .self-video-card video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
