@@ -163,8 +163,8 @@ function renderParticipantList() {
   participantList.replaceChildren();
   if (!activeRoom) return;
   participantList.append(createParticipantRow(activeRoom.localParticipant, true));
-  for (const participant of remoteParticipants.values()) {
-    participantList.append(createParticipantRow(participant, false));
+  for (const participantView of remoteParticipants.values()) {
+    participantList.append(createParticipantRow(participantView.participant, false));
   }
   $("#participant-count").textContent = String(remoteParticipants.size + 1);
 }
