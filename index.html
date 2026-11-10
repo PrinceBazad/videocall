@@ -112,7 +112,7 @@
           <section class="lower-grid">
             <div class="schedule-section" id="upcoming">
               <div class="section-heading">
-                <div><h2>Coming up</h2><p>Your day, with a little face time.</p></div>
+                <div><h2>Coming up</h2><p>Sample schedule — no meetings are saved.</p></div>
                 <button class="text-button" id="view-schedule">View calendar <span>→</span></button>
               </div>
               <div class="meeting-list">
@@ -136,7 +136,7 @@
             </div>
 
             <aside class="people-card">
-              <div class="people-card-header"><div><h2>Your people</h2><p>Good company, one click away.</p></div><button class="more-button" id="people-more" aria-label="More people options">···</button></div>
+              <div class="people-card-header"><div><h2>Your people</h2><p>Sample contacts — invite from a meeting.</p></div><button class="more-button" id="people-more" aria-label="More people options">···</button></div>
               <div class="people-presence"><div class="stacked-avatars"><span class="person-avatar person-one">A</span><span class="person-avatar person-two">M</span><span class="person-avatar person-three">J</span></div><span><strong>3 people</strong> are around</span></div>
               <div class="people-card-footer"><span class="availability-label"><i></i> Ready to chat</span><button class="invite-button" id="invite-button"><span>＋</span> Invite someone</button></div>
             </aside>
@@ -150,8 +150,9 @@
     <main id="call-screen" class="call-screen hidden" aria-label="Meeting room">
       <header class="call-topbar">
         <a class="call-brand" href="#" aria-label="Orbit home"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span> orbit<span class="brand-period">.</span></a>
-        <div class="call-title"><span class="call-status-dot"></span><span id="call-room-name">Instant meeting</span><span class="call-title-divider"></span><span class="call-time" id="call-timer">00:00</span></div>
+        <div class="call-title"><span class="call-status-dot" id="call-status-indicator"></span><span id="call-room-name">Instant meeting</span><span class="call-title-divider"></span><span class="call-time" id="call-timer">00:00</span></div>
         <div class="call-top-actions">
+          <button class="call-top-button enable-audio hidden" id="enable-audio">Enable call audio</button>
           <button class="call-top-button" id="copy-invite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 3l-1.7 1.7m2.7 6.3a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21l1.7-1.7"/></svg> <span>Copy invite</span></button>
           <button class="icon-button call-close-button" id="leave-top" aria-label="Leave meeting"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button>
         </div>
@@ -165,26 +166,27 @@
             <div class="room-kicker"><span></span> YOUR ROOM IS READY</div>
             <h1>A good conversation<br>starts with <em>hello.</em></h1>
             <p>Invite someone in. They'll be right here when they join.</p>
+            <p class="room-help">If you allow camera access, your video will start. Your microphone stays off until you turn it on.</p>
             <button class="stage-invite-button" id="stage-invite">Copy meeting link <span>↗</span></button>
-            <div class="room-code-label">ROOM CODE <button id="copy-room-code">ORBIT-<span id="room-code-display">0000</span> <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg></button></div>
-          </div>
+            <button class="retry-connection hidden" id="retry-connection">Try connecting again</button>
+            <div class="room-code-label">ROOM CODE <button id="copy-room-code">ORBIT-<span id="room-code-display">000000000000000000000000</span> <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg></button></div>
+            </div>
+            <div class="remote-video-grid" id="remote-video-grid" aria-live="polite"></div>
           <div class="self-video-card" id="self-video-card">
             <video id="local-video" autoplay playsinline muted></video>
             <div class="video-placeholder" id="video-placeholder"><span class="self-avatar" id="self-avatar">Y</span><span>Your camera is off</span></div>
             <div class="self-video-footer"><span id="self-video-name">You</span><span class="self-audio-indicator" id="self-audio-indicator"><i></i><i></i><i></i></span></div>
           </div>
-          <div class="connection-note"><span></span> Only you are here <i>·</i> Invite someone to join</div>
+          <div class="connection-note" id="connection-note"><span class="connection-indicator" id="connection-indicator"></span><span id="connection-note-copy">Connecting to your meeting…</span></div>
         </div>
         <aside class="call-side-panel" id="call-side-panel">
           <div class="panel-topline"><span>IN THIS ROOM</span><button class="panel-close" aria-label="Close participant panel" id="close-panel">×</button></div>
           <div class="participant-count"><h2>People</h2><span id="participant-count">1</span></div>
-          <div class="participant-row">
-            <span class="participant-avatar participant-you" id="participant-avatar">Y</span><span class="participant-name"><strong id="participant-name">You</strong><small>Meeting host</small></span><span class="participant-mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3m-4 0h8"/></svg></span>
-          </div>
+          <div class="participant-list" id="participant-list"></div>
           <button class="invite-people-button" id="panel-invite"><span>＋</span> Invite people</button>
           <div class="panel-divider"></div>
           <div class="room-note-card"><span class="room-note-icon">✳</span><strong>Better together.</strong><p>Share your meeting link and bring someone into the room.</p><button id="panel-copy">Copy link <span>→</span></button></div>
-          <div class="privacy-note"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 4v3"/></svg> This room is private to your invite.</div>
+          <div class="privacy-note"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 4v3"/></svg> Anyone with this invite link can join.</div>
         </aside>
       </section>
       <footer class="call-controls">
@@ -203,8 +205,9 @@
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
       <section class="chat-drawer hidden" id="chat-drawer" aria-label="Meeting chat">
         <div class="chat-drawer-header"><div><strong>In-call chat</strong><span>Messages stay in this room</span></div><button id="close-chat" aria-label="Close chat">×</button></div>
+        <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
         <div class="chat-empty"><span>✳</span><strong>Break the ice.</strong><p>Send a little hello to get things started.</p></div>
-        <form class="chat-form" id="chat-form"><input id="chat-input" type="text" placeholder="Say something nice…" autocomplete="off" aria-label="Type a chat message"><button type="submit" aria-label="Send message">↑</button></form>
+        <form class="chat-form" id="chat-form"><input id="chat-input" type="text" maxlength="1000" placeholder="Say something nice…" autocomplete="off" aria-label="Type a chat message"><button type="submit" aria-label="Send message">↑</button></form>
       </section>
     </main>
 
@@ -218,7 +221,7 @@
         <label for="display-name">Your name</label>
         <input id="display-name" name="name" type="text" placeholder="What should we call you?" maxlength="32" autocomplete="name">
         <label for="meeting-code">Meeting code</label>
-        <input id="meeting-code" name="code" type="text" placeholder="e.g. ORBIT-1234" maxlength="24" autocomplete="off">
+        <input id="meeting-code" name="code" type="text" placeholder="e.g. ORBIT-A1B2C3…" maxlength="30" autocomplete="off">
         <button class="modal-submit" type="submit">Join the room <span>→</span></button>
         <span class="modal-footnote">No account needed. Just come as you are.</span>
       </form>
@@ -237,5 +240,5 @@
       </form>
     </div>
   </body>
-  <script src="app.js"></script>
+  <script type="module" src="/app.js"></script>
 </html>

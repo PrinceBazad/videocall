@@ -171,18 +171,22 @@ h1, h2, p { margin-top: 0; }
 .call-brand .brand-mark { width: 22px; height: 22px; border-radius: 7px; }
 .call-title { display: flex; align-items: center; gap: 9px; color: #efedf0; font-size: 11px; font-weight: 600; }
 .call-status-dot { width: 7px; height: 7px; border-radius: 50%; background: #aaf261; box-shadow: 0 0 10px #aaf26380; }
+.call-status-dot.call-status-pending { background: #efc06e; box-shadow: 0 0 9px #efc06e70; }
+.call-status-dot.call-status-error { background: #ff847b; box-shadow: 0 0 9px #ff847b70; }
 .call-title-divider { height: 13px; margin: 0 3px; border-left: 1px solid #3b3c42; }
 .call-time { color: #aaa9b0; font-size: 10px; font-variant-numeric: tabular-nums; font-weight: 500; }
 .call-top-actions { display: flex; align-items: center; gap: 12px; }
 .call-top-button { display: flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid #3b3c43; border-radius: 7px; background: #222329; color: #e1dfe4; font-size: 9px; font-weight: 600; }
 .call-top-button:hover { border-color: #6a6290; background: #2a2933; }
 .call-top-button svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.call-top-button.enable-audio { border-color: #7261c2; background: #6554b434; color: #d7ceff; }
 .call-close-button { width: 31px; height: 31px; border-color: #34353a; background: transparent; color: #a6a5ad; }
 .call-stage { display: flex; flex: 1; min-height: 0; padding: 18px; gap: 13px; }
 .stage-main { position: relative; display: flex; flex: 1; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #2c2d34; border-radius: 12px; background: radial-gradient(ellipse at 50% 46%,#292932 0,#202127 35%,#1b1c22 73%); }
 .room-ambient { position: absolute; width: 350px; height: 350px; border-radius: 50%; filter: blur(75px); pointer-events: none; }
 .ambient-one { top: -180px; left: 9%; background: #6253a429; }.ambient-two { right: 4%; bottom: -235px; background: #af794023; }
 .waiting-content { position: relative; z-index: 1; display: flex; align-items: center; flex-direction: column; margin-top: -12px; text-align: center; }
+.room-help { max-width: 250px; margin: -10px 0 13px; color: #a3a2aa; font-size: 8px; line-height: 1.5; }
 .waiting-icon { position: relative; width: 106px; height: 106px; display: grid; place-items: center; margin-bottom: 22px; }
 .waiting-orbit { position: absolute; inset: 4px; border: 1px solid #ffffff18; border-radius: 50%; }
 .waiting-orbit-one { transform: scaleX(.55) rotate(35deg); border-color: #9281ef4a; }
@@ -200,7 +204,25 @@ h1, h2, p { margin-top: 0; }
 .room-code-label { display: flex; align-items: center; gap: 7px; margin-top: 14px; color: #777780; font-size: 7px; font-weight: 700; letter-spacing: .95px; }
 .room-code-label button { display: flex; align-items: center; gap: 4px; padding: 3px 5px; border: 0; border-radius: 3px; background: transparent; color: #a5a3ad; font-size: 8px; font-weight: 600; letter-spacing: .7px; }
 .room-code-label button:hover { color: #d4cdff; background: #ffffff0d; }
+.room-code-label button span { overflow-wrap: anywhere; }
 .room-code-label svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.retry-connection { margin-top: 9px; padding: 7px 10px; border: 1px solid #ffffff25; border-radius: 6px; background: #ffffff0c; color: #d1c9ff; font-size: 8px; }
+.retry-connection:hover { background: #ffffff16; }
+.remote-video-grid { position: absolute; z-index: 0; inset: 14px; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(230px,45%),1fr)); align-content: center; gap: 12px; overflow: auto; padding-bottom: 70px; }
+.remote-video-grid:empty { display: none; }
+.stage-main.has-remote-participants .waiting-content { display: none; }
+.remote-participant-card { position: relative; min-height: 155px; aspect-ratio: 16/10; overflow: hidden; border: 1px solid #ffffff1c; border-radius: 10px; background: #292a31; box-shadow: 0 6px 22px #08080b4d; }
+.remote-participant-feeds { position: absolute; inset: 0; }
+.remote-video-feed { position: absolute; z-index: 0; inset: 0; min-width: 0; min-height: 0; overflow: hidden; }
+.remote-video-feed video { width: 100%; height: 100%; object-fit: cover; }
+.remote-screen-feed { z-index: 1; background: #121319; }
+.remote-screen-feed video { object-fit: contain; background: #121319; }
+.remote-video-placeholder { position: absolute; z-index: 1; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 7px; background: linear-gradient(145deg,#38333e,#2c2c34); color: #aaa8b1; font-size: 8px; }
+.remote-avatar { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid #c8baff66; border-radius: 50%; background: #8e7ae333; color: #d6cfff; font: 600 15px "Manrope",sans-serif; }
+.remote-participant-footer,.remote-video-label { position: absolute; right: 0; bottom: 0; left: 0; padding: 15px 9px 7px; background: linear-gradient(transparent,#101116bd); color: #f6f5f7; font-size: 8px; }
+.remote-video-label { z-index: 1; }
+.remote-participant-footer { z-index: 2; pointer-events: none; }
+.remote-audio { position: fixed; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .self-video-card { position: absolute; z-index: 2; right: 17px; bottom: 17px; width: clamp(135px,17vw,208px); aspect-ratio: 16/10; overflow: hidden; border: 1px solid #ffffff2a; border-radius: 9px; background: #292a31; box-shadow: 0 8px 24px #08080b4d; }
 .self-video-card video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
 .self-video-card video.screen-shared { object-fit: contain; transform: none; background: #14151b; }
@@ -211,8 +233,11 @@ h1, h2, p { margin-top: 0; }
 .self-audio-indicator i { width: 2px; height: 4px; border-radius: 2px; background: #c5fb84; }
 .self-audio-indicator i:nth-child(2) { height: 8px; }.self-audio-indicator i:nth-child(3) { height: 5px; }
 .self-audio-indicator.muted i { height: 2px; background: #7b7a82; }
-.connection-note { position: absolute; bottom: 19px; left: 19px; display: flex; align-items: center; gap: 6px; color: #87868f; font-size: 8px; }
-.connection-note > span { width: 5px; height: 5px; border-radius: 50%; background: #b7ee76; }
+.connection-note { position: absolute; z-index: 1; bottom: 19px; left: 19px; display: flex; align-items: center; gap: 6px; color: #87868f; font-size: 8px; }
+.connection-indicator { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: #b7ee76; }
+.connection-indicator.connection-pending { background: #efc06e; }
+.connection-indicator.connection-error { background: #ff847b; }
+.connection-note-copy { min-width: 0; }
 .connection-note i { color: #55545d; font-style: normal; }
 .call-side-panel { width: 236px; flex: 0 0 236px; padding: 18px 15px; border: 1px solid #2c2d34; border-radius: 11px; background: #1e1f25; }
 .panel-topline { display: flex; align-items: center; justify-content: space-between; color: #898892; font-size: 8px; font-weight: 700; letter-spacing: 1px; }
@@ -221,6 +246,7 @@ h1, h2, p { margin-top: 0; }
 .participant-count h2 { margin: 0; font: 600 13px "Manrope", sans-serif; }
 .participant-count > span { padding: 3px 6px; border-radius: 5px; background: #34343b; color: #b5b3bc; font-size: 8px; }
 .participant-row { display: flex; align-items: center; margin-top: 16px; padding-bottom: 16px; border-bottom: 1px solid #ffffff0d; }
+.participant-list .participant-row { margin-top: 13px; }
 .participant-avatar { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 10px; font: 600 11px "Manrope", sans-serif; }
 .participant-you { border: 1px solid #a48dfb40; background: linear-gradient(135deg,#51446e,#393044); color: #d8ceff; }
 .participant-name { display: grid; gap: 4px; margin-left: 9px; }
@@ -228,6 +254,7 @@ h1, h2, p { margin-top: 0; }
 .participant-name small { color: #94929b; font-size: 8px; }
 .participant-mic { display: grid; width: 23px; height: 23px; place-items: center; margin-left: auto; border-radius: 50%; background: #2a2b31; color: #c8c6ce; }
 .participant-mic svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.participant-mic.participant-muted { color: #ff9a94; }
 .invite-people-button { width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 13px; padding: 9px; border: 1px solid #6555ae49; border-radius: 6px; background: #6a59bd19; color: #c6bbff; font-size: 9px; font-weight: 600; }
 .invite-people-button:hover { background: #6a59bd2e; }
 .invite-people-button span { font-size: 14px; }
@@ -263,11 +290,17 @@ h1, h2, p { margin-top: 0; }
 .chat-drawer-header > div span { color: #92909a; font-size: 8px; }
 .chat-drawer-header button { border: 0; background: transparent; color: #aaa8b1; font-size: 19px; }
 .chat-empty { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #aaa8b1; text-align: center; }
+.chat-messages { display: flex; flex: 1; flex-direction: column; gap: 10px; overflow-y: auto; padding: 13px; }
+.chat-messages:empty { display: none; }
+.chat-message-item { display: flex; align-items: flex-start; flex-direction: column; gap: 4px; }
+.chat-message-item.chat-message-local { align-items: flex-end; }
+.chat-message-author { color: #aaa8b1; font-size: 8px; }
 .chat-empty > span { display: grid; width: 39px; height: 39px; place-items: center; margin-bottom: 11px; border: 1px solid #ffffff12; border-radius: 13px; background: #ffffff08; color: #d1c5ff; font-size: 18px; }
 .chat-empty strong { color: #eeedf0; font: 600 12px "Manrope", sans-serif; }
 .chat-empty p { margin: 6px 0 0; font-size: 8px; }
 .chat-messages { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; padding: 13px; }
-.chat-message { align-self: flex-end; max-width: 85%; padding: 9px 11px; border-radius: 10px 10px 3px 10px; background: #6454a9; color: white; font-size: 9px; line-height: 1.45; overflow-wrap: anywhere; }
+.chat-message { align-self: flex-start; max-width: 85%; padding: 9px 11px; border-radius: 10px 10px 10px 3px; background: #35353e; color: white; font-size: 9px; line-height: 1.45; overflow-wrap: anywhere; }
+.chat-message-local .chat-message { align-self: flex-end; border-radius: 10px 10px 3px 10px; background: #6454a9; }
 .chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #ffffff12; }
 .chat-form input { min-width: 0; flex: 1; padding: 9px 10px; border: 1px solid #414149; border-radius: 6px; outline: none; background: #2b2c33; color: white; font-size: 9px; }
 .chat-form input:focus { border-color: #8b79e0; }
@@ -380,6 +413,9 @@ h1, h2, p { margin-top: 0; }
   .waiting-center { width: 45px; height: 45px; }
   .waiting-content h1 { font-size: 25px; }
   .waiting-content > p { max-width: 215px; font-size: 9px; line-height: 1.5; }
+  .room-help { font-size: 7px !important; }
+  .remote-video-grid { grid-template-columns: 1fr; align-content: start; padding-bottom: 74px; }
+  .remote-participant-card { min-height: 125px; }
   .self-video-card { right: 10px; bottom: 37px; width: 114px; }
   .connection-note { bottom: 12px; left: 11px; font-size: 7px; }
   .call-controls { min-height: 77px; justify-content: space-between; padding: 8px 8px; }

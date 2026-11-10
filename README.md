@@ -1,36 +1,47 @@
 # Orbit
 
-A responsive video-meeting website prototype built with plain HTML, CSS, and JavaScript.
+A responsive video meeting website with real-time audio, video, screen sharing, participant updates, and in-room chat, powered by LiveKit.
 
 **Live demo:** https://newvideo-xi.vercel.app
+**GitHub:** https://github.com/PrinceBazad/videocall
+
+The sample calendar and contacts on the dashboard are presentation content. They do not represent saved meetings or registered users.
+
+## Set up LiveKit
+
+Create a project in [LiveKit Cloud](https://cloud.livekit.io/) and copy its WebSocket URL, API key, and API secret from the project settings.
+
+Configure these values in **Vercel → Project Settings → Environment Variables** for Production, Preview, and Development:
+
+| Variable | Value |
+|---|---|
+| `LIVEKIT_URL` | Your project's secure `wss://…` WebSocket URL |
+| `LIVEKIT_API_KEY` | Your LiveKit API key |
+| `LIVEKIT_API_SECRET` | Your LiveKit API secret |
+
+Save the variables and redeploy. The API secret is used only by the Vercel token endpoint; **never** add it to client-side code or a `VITE_` variable. The deployment stays available without these values, but joining a meeting displays a clear setup error until they are configured.
 
 ## Run locally
 
-Open `index.html` in a browser, or serve this folder from a local web server. Camera and microphone access require `localhost` or HTTPS and your permission.
-
-## Deploy to Vercel
-
-This is a static site: it has no build command and its output is the project root.
-
-### Deploy with the Vercel CLI
+Install dependencies. Add your LiveKit values to an ignored `.env.local` file in the project root:
 
 ```powershell
-vercel
+npm install
 ```
 
-Follow the prompts to create or link a Vercel project. When you are ready to publish a production deployment, run:
+Copy `.env.example` to `.env.local` and replace its placeholder values with the credentials from your LiveKit Cloud project. Verify that `.env.local` is not committed; it is excluded by `.gitignore`.
+
+Run `npm run dev` and open the local URL printed in your terminal. The Vite development server exposes the same token endpoint as the Vercel Function. Camera and microphone access need your permission. Use two browser windows/devices to test a real call.
+
+## Test and build
 
 ```powershell
-vercel --prod
+npm test
+npm run build
 ```
 
-### Deploy from GitHub
+## How calls work
 
-1. Push this project to a GitHub repository.
-2. In Vercel, choose **Add New → Project** and import the repository.
-3. Keep the framework preset as **Other**. Leave the build command empty and set the output directory to `.`.
-4. Deploy. Vercel will create preview deployments for later pushes and production deployments from the configured production branch.
+The `/api/token` Vercel Function validates a room code and issues a short-lived participant token with room-scoped permissions. The browser uses that token to connect to LiveKit over WebRTC. Camera, microphone, screen sharing, remote participant tracks, and chat are connected to the active room. Meeting invitations contain a randomly generated, 96-bit room code. Anyone who has an invitation can join and publish media.
 
-## Prototype limitations
-
-Meeting rooms, participant lists, and chat are local interface demonstrations. They do not connect callers across devices; that requires a real-time signaling service and a WebRTC backend.
+The site does not implement accounts, saved schedules, or persistent contacts. LiveKit usage and any account limits or charges are governed by your LiveKit plan.
