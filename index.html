@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta name="description" content="A calmer place for conversations. Start a video meeting with Orbit.">
+    <title>Orbit — Make room for a good conversation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main id="home-screen" class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="Orbit home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>orbit<span class="brand-period">.</span></span>
+        </a>
+
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#home-screen" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>
+            Overview
+          </a>
+          <a class="nav-link" href="#upcoming">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="15" rx="3"/><path d="M7.5 3.5v4m9-4v4m-13 3h17"/></svg>
+            Your schedule
+            <span class="nav-count">2</span>
+          </a>
+          <button class="nav-link" id="open-people">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H7.4A3.4 3.4 0 0 0 4 18.4V20"/><circle cx="10" cy="7.5" r="3.5"/><path d="M16 4.2a3.5 3.5 0 0 1 0 6.7m2 4.2a3.4 3.4 0 0 1 2 3.3V20"/></svg>
+            People
+          </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="upgrade-card">
+            <span class="upgrade-spark" aria-hidden="true">✳</span>
+            <p>A little more room<br>for big ideas.</p>
+            <button type="button" class="upgrade-link" id="upgrade-link">Explore Orbit Pro <span>↗</span></button>
+          </div>
+          <button type="button" class="profile-button" id="profile-button">
+            <span class="avatar avatar-you">Y</span>
+            <span class="profile-copy"><strong id="profile-name">Your space</strong><small>Personal workspace</small></span>
+            <svg class="profile-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+          </button>
+        </div>
+      </aside>
+
+      <section class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>Workspace</span><span class="crumb-slash">/</span><strong>Overview</strong></div>
+          <div class="topbar-right">
+            <div class="presence"><span class="presence-dot"></span> All systems lovely</div>
+            <button class="icon-button notification-button" aria-label="Notifications" id="notifications-button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12h4"/></svg>
+              <span class="notification-dot"></span>
+            </button>
+          </div>
+        </header>
+
+        <div class="content-inner">
+          <section class="welcome-row">
+            <div>
+              <div class="date-label" id="today-label"></div>
+              <h1>Good to see you<span class="heading-period">.</span></h1>
+              <p class="welcome-subtitle">A little face time goes a long way.</p>
+            </div>
+            <button class="new-meeting-button" id="new-meeting">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 10 5-3v10l-5-3"/><rect x="3" y="6" width="12" height="12" rx="3"/></svg>
+              Start a meeting
+              <span class="button-shortcut">↗</span>
+            </button>
+          </section>
+
+          <section class="hero-card" aria-label="Start a video meeting">
+            <div class="hero-copy">
+              <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> YOUR SPACE, YOUR PEOPLE</div>
+              <h2>Make room for<br> a good <span>conversation.</span></h2>
+              <p>One click to bring everyone a little closer. No fuss, just faces.</p>
+              <div class="hero-actions">
+                <button class="hero-start-button" id="hero-start">Start an instant meeting <span>↗</span></button>
+                <button class="hero-join-button" id="hero-join">Join with a code</button>
+              </div>
+              <div class="hero-footnote"><span class="tiny-lock" aria-hidden="true">◇</span> Your meetings are yours. Always private.</div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="art-orbit orbit-one"></div>
+              <div class="art-orbit orbit-two"></div>
+              <div class="art-glow"></div>
+              <div class="art-spark spark-one">✳</div>
+              <div class="art-spark spark-two">✦</div>
+              <div class="art-caption"><span class="caption-live"></span> GOOD PEOPLE, GOOD ENERGY</div>
+              <div class="video-preview preview-back">
+                <div class="portrait portrait-maya"><span>M</span></div>
+                <div class="preview-caption"><strong>Maya Chen</strong><span>Ready when you are</span></div>
+              </div>
+              <div class="video-preview preview-front">
+                <div class="portrait portrait-jamie"><span>J</span><i class="portrait-sun"></i></div>
+                <div class="preview-caption"><strong>Jamie Rivera</strong><span><i class="audio-bars"><b></b><b></b><b></b><b></b></i> Speaking</span></div>
+                <div class="preview-mic" aria-label="Microphone on">
+                  <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3m-4 0h8"/></svg>
+                </div>
+              </div>
+              <div class="floating-note"><span class="note-heart">✳</span><span><strong>Feels like being there.</strong><small>That's the whole idea.</small></span></div>
+            </div>
+          </section>
+
+          <section class="lower-grid">
+            <div class="schedule-section" id="upcoming">
+              <div class="section-heading">
+                <div><h2>Coming up</h2><p>Your day, with a little face time.</p></div>
+                <button class="text-button" id="view-schedule">View calendar <span>→</span></button>
+              </div>
+              <div class="meeting-list">
+                <article class="meeting-card">
+                  <div class="meeting-time"><strong>10:30</strong><span>AM</span></div>
+                  <div class="meeting-divider"><span></span></div>
+                  <div class="meeting-details"><strong>Monday catch-up</strong><span>With Alex &amp; 2 others</span></div>
+                  <div class="mini-avatars"><span class="mini-avatar mini-a">A</span><span class="mini-avatar mini-b">M</span><span class="mini-avatar mini-c">+2</span></div>
+                  <span class="meeting-duration">30 min</span>
+                  <button class="meeting-more" aria-label="More meeting options">···</button>
+                </article>
+                <article class="meeting-card">
+                  <div class="meeting-time"><strong>02:00</strong><span>PM</span></div>
+                  <div class="meeting-divider"><span class="divider-muted"></span></div>
+                  <div class="meeting-details"><strong>Ideas, over coffee</strong><span>With Priya Shah</span></div>
+                  <div class="mini-avatars"><span class="mini-avatar mini-d">P</span><span class="mini-avatar mini-e">Y</span></div>
+                  <span class="meeting-duration">45 min</span>
+                  <button class="meeting-more" aria-label="More meeting options">···</button>
+                </article>
+              </div>
+            </div>
+
+            <aside class="people-card">
+              <div class="people-card-header"><div><h2>Your people</h2><p>Good company, one click away.</p></div><button class="more-button" id="people-more" aria-label="More people options">···</button></div>
+              <div class="people-presence"><div class="stacked-avatars"><span class="person-avatar person-one">A</span><span class="person-avatar person-two">M</span><span class="person-avatar person-three">J</span></div><span><strong>3 people</strong> are around</span></div>
+              <div class="people-card-footer"><span class="availability-label"><i></i> Ready to chat</span><button class="invite-button" id="invite-button"><span>＋</span> Invite someone</button></div>
+            </aside>
+          </section>
+
+          <footer class="page-footer"><span>Made for the moments that matter.</span><span>© <span id="current-year"></span> Orbit Studio <i>✳</i></span></footer>
+        </div>
+      </section>
+    </main>
+
+    <main id="call-screen" class="call-screen hidden" aria-label="Meeting room">
+      <header class="call-topbar">
+        <a class="call-brand" href="#" aria-label="Orbit home"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span> orbit<span class="brand-period">.</span></a>
+        <div class="call-title"><span class="call-status-dot"></span><span id="call-room-name">Instant meeting</span><span class="call-title-divider"></span><span class="call-time" id="call-timer">00:00</span></div>
+        <div class="call-top-actions">
+          <button class="call-top-button" id="copy-invite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 3l-1.7 1.7m2.7 6.3a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21l1.7-1.7"/></svg> <span>Copy invite</span></button>
+          <button class="icon-button call-close-button" id="leave-top" aria-label="Leave meeting"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 6-12 12M6 6l12 12"/></svg></button>
+        </div>
+      </header>
+
+      <section class="call-stage">
+        <div class="stage-main">
+          <div class="room-ambient ambient-one"></div><div class="room-ambient ambient-two"></div>
+          <div class="waiting-content">
+            <div class="waiting-icon"><span class="waiting-orbit waiting-orbit-one"></span><span class="waiting-orbit waiting-orbit-two"></span><span class="waiting-center"><span class="brand-mark"><span></span><span></span><span></span></span></span></div>
+            <div class="room-kicker"><span></span> YOUR ROOM IS READY</div>
+            <h1>A good conversation<br>starts with <em>hello.</em></h1>
+            <p>Invite someone in. They'll be right here when they join.</p>
+            <button class="stage-invite-button" id="stage-invite">Copy meeting link <span>↗</span></button>
+            <div class="room-code-label">ROOM CODE <button id="copy-room-code">ORBIT-<span id="room-code-display">0000</span> <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg></button></div>
+          </div>
+          <div class="self-video-card" id="self-video-card">
+            <video id="local-video" autoplay playsinline muted></video>
+            <div class="video-placeholder" id="video-placeholder"><span class="self-avatar" id="self-avatar">Y</span><span>Your camera is off</span></div>
+            <div class="self-video-footer"><span id="self-video-name">You</span><span class="self-audio-indicator" id="self-audio-indicator"><i></i><i></i><i></i></span></div>
+          </div>
+          <div class="connection-note"><span></span> Only you are here <i>·</i> Invite someone to join</div>
+        </div>
+        <aside class="call-side-panel" id="call-side-panel">
+          <div class="panel-topline"><span>IN THIS ROOM</span><button class="panel-close" aria-label="Close participant panel" id="close-panel">×</button></div>
+          <div class="participant-count"><h2>People</h2><span id="participant-count">1</span></div>
+          <div class="participant-row">
+            <span class="participant-avatar participant-you" id="participant-avatar">Y</span><span class="participant-name"><strong id="participant-name">You</strong><small>Meeting host</small></span><span class="participant-mic"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3m-4 0h8"/></svg></span>
+          </div>
+          <button class="invite-people-button" id="panel-invite"><span>＋</span> Invite people</button>
+          <div class="panel-divider"></div>
+          <div class="room-note-card"><span class="room-note-icon">✳</span><strong>Better together.</strong><p>Share your meeting link and bring someone into the room.</p><button id="panel-copy">Copy link <span>→</span></button></div>
+          <div class="privacy-note"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 4v3"/></svg> This room is private to your invite.</div>
+        </aside>
+      </section>
+      <footer class="call-controls">
+        <div class="call-control-group">
+          <button class="call-control active-control" id="toggle-mic" aria-label="Turn microphone off" aria-pressed="false"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3m-4 0h8"/></svg><span>Mic</span></button>
+          <button class="call-control active-control" id="toggle-camera" aria-label="Turn camera off" aria-pressed="false"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/></svg><span>Camera</span></button>
+          <button class="call-control" id="share-screen" aria-label="Share your screen"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4m0-14v8m-3-5 3-3 3 3"/></svg><span>Share</span></button>
+        </div>
+        <button class="leave-button" id="leave-call"><span class="leave-icon"><svg viewBox="0 0 24 24"><path d="m5 9 2-4h10l2 4-7 4-7-4Zm0 0v6h14V9m-12 6v3m8-3v3"/></svg></span> Leave</button>
+        <div class="call-control-group call-secondary-controls">
+          <button class="call-control" id="toggle-chat" aria-label="Open chat"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.7 8.7 0 0 1-4-.9L4 20l1.2-3.4A7.2 7.2 0 0 1 4 12C4 7.9 7.6 5 12 5s8 2.9 8 6.5Z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg><span>Chat</span></button>
+          <button class="call-control" id="toggle-people" aria-label="Show participants"><svg viewBox="0 0 24 24"><path d="M16 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H7.4A3.4 3.4 0 0 0 4 18.4V20"/><circle cx="10" cy="7.5" r="3.5"/><path d="M16 4.2a3.5 3.5 0 0 1 0 6.7m2 4.2a3.4 3.4 0 0 1 2 3.3V20"/></svg><span>People</span></button>
+          <button class="call-control" id="more-call-options" aria-label="More meeting options"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>More</span></button>
+        </div>
+      </footer>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <section class="chat-drawer hidden" id="chat-drawer" aria-label="Meeting chat">
+        <div class="chat-drawer-header"><div><strong>In-call chat</strong><span>Messages stay in this room</span></div><button id="close-chat" aria-label="Close chat">×</button></div>
+        <div class="chat-empty"><span>✳</span><strong>Break the ice.</strong><p>Send a little hello to get things started.</p></div>
+        <form class="chat-form" id="chat-form"><input id="chat-input" type="text" placeholder="Say something nice…" autocomplete="off" aria-label="Type a chat message"><button type="submit" aria-label="Send message">↑</button></form>
+      </section>
+    </main>
+
+    <div class="modal-backdrop hidden" id="join-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+      <form class="modal-card" id="join-form">
+        <button type="button" class="modal-close" id="close-modal" aria-label="Close">×</button>
+        <span class="modal-mark"><span class="brand-mark"><span></span><span></span><span></span></span></span>
+        <div class="modal-eyebrow">PULL UP A CHAIR</div>
+        <h2 id="modal-heading">Join a meeting.</h2>
+        <p>Enter the room code your host shared with you.</p>
+        <label for="display-name">Your name</label>
+        <input id="display-name" name="name" type="text" placeholder="What should we call you?" maxlength="32" autocomplete="name">
+        <label for="meeting-code">Meeting code</label>
+        <input id="meeting-code" name="code" type="text" placeholder="e.g. ORBIT-1234" maxlength="24" autocomplete="off">
+        <button class="modal-submit" type="submit">Join the room <span>→</span></button>
+        <span class="modal-footnote">No account needed. Just come as you are.</span>
+      </form>
+    </div>
+
+    <div class="modal-backdrop hidden" id="name-modal" role="dialog" aria-modal="true" aria-labelledby="name-heading">
+      <form class="modal-card" id="name-form">
+        <button type="button" class="modal-close" id="close-name-modal" aria-label="Close">×</button>
+        <span class="modal-mark"><span class="brand-mark"><span></span><span></span><span></span></span></span>
+        <div class="modal-eyebrow">MAKE IT PERSONAL</div>
+        <h2 id="name-heading">What should we call you?</h2>
+        <p>Your name will show up when you join a room.</p>
+        <label for="profile-name-input">Your name</label>
+        <input id="profile-name-input" name="name" type="text" maxlength="32" autocomplete="name">
+        <button class="modal-submit" type="submit">Save my name <span>→</span></button>
+      </form>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>
