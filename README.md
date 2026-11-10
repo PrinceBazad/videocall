@@ -2,6 +2,8 @@
 
 A responsive video-meeting website prototype built with plain HTML, CSS, and JavaScript.
 
+**Live demo:** https://newvideo-xi.vercel.app
+
 ## Run locally
 
 Open `index.html` in a browser, or serve this folder from a local web server. Camera and microphone access require `localhost` or HTTPS and your permission.
