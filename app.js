@@ -5,6 +5,7 @@ const joinModal = $("#join-modal");
 const nameModal = $("#name-modal");
 const localVideo = $("#local-video");
 const videoPlaceholder = $("#video-placeholder");
+const stageMain = $(".stage-main");
 const toast = $("#toast");
 const roomCodeDisplay = $("#room-code-display");
 const participantList = $("#participant-list");
@@ -173,6 +174,7 @@ function renderParticipantList() {
 function updateParticipantFocus() {
   const focusedView = remoteParticipants.get(focusedParticipantId);
   if (!focusedView) focusedParticipantId = "";
+  stageMain.classList.toggle("has-remote-participants", remoteParticipants.size > 0);
 
   for (const participantView of remoteParticipants.values()) {
     const isFocused = participantView.participant.identity === focusedParticipantId;
@@ -485,6 +487,21 @@ function updateTimer() {
     + ":" + String(elapsed % 60).padStart(2, "0");
 }
 
+function requestCallFullscreen() {
+  if (document.fullscreenElement === callScreen) return;
+  if (typeof callScreen.requestFullscreen !== "function") {
+    showToast("Your browser doesn't support full screen mode.");
+    return;
+  }
+  try {
+    callScreen.requestFullscreen().catch(() => {
+      showToast("Your browser blocked full screen. Use its full-screen control to enter it.");
+    });
+  } catch {
+    showToast("Your browser blocked full screen. Use its full-screen control to enter it.");
+  }
+}
+
 async function enterRoom(code) {
   activeRoomCode = code || makeRoomCode();
   roomCodeDisplay.textContent = activeRoomCode;
@@ -493,6 +510,7 @@ async function enterRoom(code) {
   homeScreen.classList.add("hidden");
   callScreen.classList.remove("hidden");
   document.body.style.overflow = "hidden";
+  requestCallFullscreen();
   callStartedAt = Date.now();
   updateTimer();
   clearInterval(timerInterval);
@@ -592,6 +610,11 @@ function leaveRoom() {
   $("#call-side-panel").classList.remove("panel-visible");
   $("#retry-connection").classList.add("hidden");
   setConnectionStatus("connecting", "Connecting to your meeting…");
+  if (document.fullscreenElement === callScreen) {
+    document.exitFullscreen().catch(() => {
+      showToast("Couldn't exit full screen. Press Escape to return to the browser.");
+    });
+  }
   callScreen.classList.add("hidden");
   homeScreen.classList.remove("hidden");
   document.body.style.overflow = "";
