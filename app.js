@@ -448,7 +448,22 @@ async function connectToRoom() {
       throw new Error("The video service returned an invalid connection response.");
     }
     livekitSdk = await import("livekit-client");
-    room = new livekitSdk.Room({ adaptiveStream: true, dynacast: true });
+    room = new livekitSdk.Room({
+      adaptiveStream: true,
+      dynacast: true,
+      videoCaptureDefaults: {
+        resolution: livekitSdk.VideoPresets.h2160.resolution,
+        frameRate: 30,
+      },
+      publishDefaults: {
+        videoEncoding: livekitSdk.VideoPresets.h2160.encoding,
+        videoSimulcastLayers: [
+          livekitSdk.VideoPresets.h720,
+          livekitSdk.VideoPresets.h1080,
+        ],
+        degradationPreference: "maintain-framerate",
+      },
+    });
     activeRoom = room;
     bindRoomEvents(room);
     await room.connect(result.serverUrl, result.token);

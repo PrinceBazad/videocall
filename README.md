@@ -45,3 +45,7 @@ npm run build
 The `/api/token` Vercel Function validates a room code and issues a short-lived participant token with room-scoped permissions. The browser uses that token to connect to LiveKit over WebRTC. Camera, microphone, screen sharing, remote participant tracks, and chat are connected to the active room. Meeting invitations contain a randomly generated, 96-bit room code. Anyone who has an invitation can join and publish media.
 
 The site does not implement accounts, saved schedules, or persistent contacts. LiveKit usage and any account limits or charges are governed by your LiveKit plan.
+
+## Video quality
+
+Camera capture requests up to 4K (2160p) at 30 fps and publishes a 4K video profile, with 720p and 1080p simulcast layers for receivers that need less bandwidth. Video prioritizes maintaining its frame rate over preserving resolution when bandwidth is constrained, so quality may automatically drop to keep playback smooth. The browser and camera may also select a lower resolution when 4K capture is unavailable. Actual delivered quality and latency depend on device performance, network conditions, and LiveKit plan limits; zero delay cannot be guaranteed over the internet.
